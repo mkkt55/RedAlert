@@ -15,6 +15,7 @@ class REDALERT_API ARedAlertGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 	
 	
-	
+public:
+	ARedAlertGameModeBase();
 	
 };

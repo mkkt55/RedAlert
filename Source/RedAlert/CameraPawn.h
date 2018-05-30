@@ -4,6 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+
+#include"GameFramework/SpringArmComponent.h"
+#include"Camera/CameraComponent.h"
+#include"Components/InputComponent.h"
+#include"Components/InputComponent.h"
+#include"Engine/Scene.h"
+
 #include "CameraPawn.generated.h"
 
 UCLASS()
@@ -26,6 +33,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	void Move_XAxis(float AxisValue);
+	void Move_YAxis(float AxisValue);
+	FVector CurrentVelocity;
+
+private:
+	UPROPERTY(EditAnyWhere)
+		class UCameraComponent* Camera;
+	UPROPERTY(EditAnyWhere)
+		class USpringArmComponent* Arm;
+
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* OurVisibleComponent;
 	
 };
