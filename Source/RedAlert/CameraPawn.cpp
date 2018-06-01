@@ -50,8 +50,8 @@ void ACameraPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	// 在每一帧都对两个移动坐标轴的值进行响应，它们分别是"MoveX"和"MoveY"。
-	InputComponent->BindAxis("MoveX", this, &ACameraPawn::Move_XAxis);
-	InputComponent->BindAxis("MoveY", this, &ACameraPawn::Move_YAxis);
+	//InputComponent->BindAxis("MoveX", this, &ACameraPawn::Move_XAxis);
+	//InputComponent->BindAxis("MoveY", this, &ACameraPawn::Move_YAxis);
 }
 
 

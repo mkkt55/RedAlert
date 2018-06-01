@@ -20,14 +20,15 @@ protected:
 	//virtual void BeginPlay() override;
 public:
 	AControllerForAPlayer();
-	//virtual void Tick(float DeltaTime) override;
-	//virtual void SetupInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+	virtual void SetupInputComponent() override;
 	ACameraPawn* GetCameraPawn();
 private:
-	void MoveScreenAlongX(float value);
-	void MoveScreenAlongY(float value);
-	void MoveToDestination(float X, float Y);
+	void MovePawnToLocation(float AxisValue);
+	void MoveScreenX(float AxisValue);
+	void MoveScreenY(float AxisValue);
+
 	ACameraPawn* MainPawn;
 	float MousePositionX;
 	float MousePositionY;
