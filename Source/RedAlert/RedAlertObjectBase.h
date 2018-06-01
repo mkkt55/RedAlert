@@ -5,14 +5,15 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include"Components/StaticMeshComponent.h"
+#include"ControllerForAPlayer.h"
 #include "RedAlertObjectBase.generated.h"
 
 UCLASS()
 class REDALERT_API ARedAlertObjectBase : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
+
+public:
 	// Sets default values for this actor's properties
 	ARedAlertObjectBase();
 
@@ -20,16 +21,23 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	float ReceivedTotalDamage;
 
-private:
+	//other actors who are attacking this actor will directly add this number via pointer
+	float ReceivedTotalDamage;
 	float CurrentHealth;
-	
+
+	AControllerForAPlayer *Controller;
+
+	/*
+	//add component to be showed in the level.
 	UPROPERTY(EditAnywhere)
-		class UStaticMeshComponent *Mesh;
-	
+	class UStaticMeshComponent *Mesh;
+	*/
+private:
+	bool GetDestroyed();
+
 };
