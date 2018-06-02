@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include"Components/StaticMeshComponent.h"
-#include"ControllerForAPlayer.h"
 #include "RedAlertObjectBase.generated.h"
 
 UCLASS()
@@ -30,7 +29,7 @@ public:
 	float ReceivedTotalDamage;
 	float CurrentHealth;
 
-	AControllerForAPlayer *Controller;
+
 
 	/*
 	//add component to be showed in the level.

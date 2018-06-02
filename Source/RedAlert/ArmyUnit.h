@@ -25,7 +25,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//Will be called by controller.may need a funtion to stop all action when receive another order from controller or attack target has been destroyed.
-	void MoveTo(float x, float y);//may need to set member variable and enable movement actually in Tick() function--you need to move a little bit every frame according to speed.
+	void MoveTo(FVector VecTarget);//may need to set member variable and enable movement actually in Tick() function--you need to move a little bit every frame according to speed.
 	void Attack(ARedAlertObjectBase *Target);
 
 

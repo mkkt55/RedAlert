@@ -34,6 +34,5 @@ void ARedAlertObjectBase::Tick(float DeltaTime)
 
 bool ARedAlertObjectBase::GetDestroyed()
 {
-	Controller;
 	return Destroy();
 }
