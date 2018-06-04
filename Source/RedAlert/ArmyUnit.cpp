@@ -1,13 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ArmyUnit.h"
-<<<<<<< HEAD
-=======
 
-
-#define AttackState 1
-//might define or enum
->>>>>>> 66b1b852857c8e9259d29cd1d7f57948113d4243
 
 
 AArmyUnit::AArmyUnit()
@@ -28,7 +22,7 @@ void AArmyUnit::BeginPlay()
 void AArmyUnit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (ActionState == AttackState) {//1 stands for attacking state
+	if (ActionState == AttackState) { //see the macro definations in head file.
 		AttackTarget->ReceivedTotalDamage += DeltaTime*Damage;
 	}
 }
