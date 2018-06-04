@@ -1,8 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "ArmyUnit.h"
-#define AttackState 0
-//might define or enum
 
 
 AArmyUnit::AArmyUnit()
@@ -22,7 +20,7 @@ void AArmyUnit::BeginPlay()
 void AArmyUnit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (CurrentState == AttackState) {//1 stands for attacking state
+	if (ActionState == AttackState) {//1 stands for attacking state
 		AttackTarget->ReceivedTotalDamage += DeltaTime*Damage;
 	}
 }

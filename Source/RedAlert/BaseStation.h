@@ -4,10 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "RedAlertObjectBase.h"
-#include"PowerStation.h"
-#include"MineFactory.h"
-#include"SoldierCamp.h"
-#include"VehicleFactory.h"
+
 #include "BaseStation.generated.h"
 
 /**
@@ -25,9 +22,6 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	APowerStation *CreatePowerStation();
-	AMineFactory *CreateMineFactory();
-	ASoldierCamp *CreateSoldierCamp();
-	AVehicleFactory *CreateVehicleFactory();
+	
 	
 };

@@ -23,8 +23,6 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	ATank *CreateTank();
-	AMineTruck *CreateMineTruck();
 	
 	
 };

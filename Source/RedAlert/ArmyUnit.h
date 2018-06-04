@@ -6,6 +6,12 @@
 #include "RedAlertObjectBase.h"
 #include "ArmyUnit.generated.h"
 
+#define AttackState 0
+#define MovingState 1
+#define StoppedState 2
+//might define or enum
+
+
 /**
 *
 */
@@ -27,14 +33,14 @@ public:
 	//Will be called by controller.may need a funtion to stop all action when receive another order from controller or attack target has been destroyed.
 	void MoveTo(float x, float y);//may need to set member variable and enable movement actually in Tick() function--you need to move a little bit every frame according to speed.
 	void Attack(ARedAlertObjectBase *Target);
+	void Stop();
 
 
 	float Damage;
 	float Speed;
 	float AttackDistance;
 
-	bool IsSelected;
-	int8 CurrentState;
+	int8 ActionState;
 
 	FVector MoveTarget;
 	ARedAlertObjectBase *AttackTarget;

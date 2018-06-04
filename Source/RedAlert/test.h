@@ -5,30 +5,30 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include"Components/StaticMeshComponent.h"
-#include "RedAlertObjectBase.generated.h"
+#include "test.generated.h"
 
 UCLASS()
-class REDALERT_API ARedAlertObjectBase : public AActor
+class REDALERT_API Atest : public AActor
 {
 	GENERATED_BODY()
-
-public:
+	
+public:	
 	// Sets default values for this actor's properties
-	ARedAlertObjectBase();
+	Atest();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Building)
+		TAssetPtr<UStaticMesh> BaseMesh;
 
-	//other actors who are attacking this actor will directly add this number via pointer
-	float ReceivedTotalDamage;
-	float CurrentHealth;
-	bool IsSelected;
-
-
+	UStaticMesh* GetLazyLoadedMesh();
+	UFUNCTION(BlueprintCallable, Category = "Asset Loading")
+		UStaticMesh * LoadMesh(const FString& Path);
+	UStaticMeshComponent* Mesh;
 };

@@ -25,9 +25,6 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 	
-	ASoldierCamp *CreateSoldier(); // And do not forget to cut the player's money.
-	int32 SoldierAwaitngCreation;
-	//stands for the time needed to creat a soldier. 
-	int32 TimeCost;
+	
 	
 };

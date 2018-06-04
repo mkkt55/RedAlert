@@ -27,13 +27,5 @@ void ARedAlertObjectBase::Tick(float DeltaTime)
 	CurrentHealth -= ReceivedTotalDamage;
 	ReceivedTotalDamage = 0;
 
-	if (CurrentHealth <= 0) {
-		GetDestroyed();
-	}
 }
 
-bool ARedAlertObjectBase::GetDestroyed()
-{
-	Controller;
-	return Destroy();
-}

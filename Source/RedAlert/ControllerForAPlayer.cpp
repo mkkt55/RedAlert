@@ -74,3 +74,26 @@ void AControllerForAPlayer::SetupInputComponent()
 	InputComponent->BindAxis("MoveY", this, &AControllerForAPlayer::MoveScreenY);
 
 }
+
+
+
+APowerStation *AControllerForAPlayer::CreatePowerStation()
+{
+	return NULL;
+}
+
+AMineFactory *AControllerForAPlayer::CreateMineFactory()
+{
+	return NULL;
+}
+
+ASoldierCamp *AControllerForAPlayer::CreateSoldierCamp()
+{
+	return NULL;
+}
+
+
+AVehicleFactory *AControllerForAPlayer::CreateVehicleFactory()
+{
+	return NULL;
+}

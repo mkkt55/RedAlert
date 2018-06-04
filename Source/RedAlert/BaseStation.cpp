@@ -20,24 +20,3 @@ void ABaseStation::Tick(float DeltaTime)
 
 }
 
-
-APowerStation *ABaseStation::CreatePowerStation()
-{
-	return NULL;
-}
-
-AMineFactory *ABaseStation::CreateMineFactory()
-{
-	return NULL;
-}
-
-ASoldierCamp *ABaseStation::CreateSoldierCamp()
-{
-	return NULL;
-}
-
-
-AVehicleFactory *ABaseStation::CreateVehicleFactory()
-{
-	return NULL;
-}
