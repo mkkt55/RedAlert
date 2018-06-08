@@ -25,6 +25,6 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 	
-	
-	
+	bool CreateSoldier(); 
+	FVector SdrCreationLoc;
 };

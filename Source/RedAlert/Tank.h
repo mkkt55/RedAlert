@@ -23,6 +23,9 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
-	
-	
+	bool CreateTank();
+	FVector TkCreationLoc;
+
+	bool CreateMineTruck();
+	FVector MTCreationLoc;
 };

@@ -27,6 +27,8 @@ void AControllerForAPlayer::BeginPlay()
 	if (MainPawn == NULL) {
 		UE_LOG(LogTemp, Warning, TEXT("Error"));
 	}
+
+	SetInputMode(FInputModeGameAndUI());
 }
 
 ACameraPawn* AControllerForAPlayer::GetCameraPawn()
@@ -73,8 +75,80 @@ void AControllerForAPlayer::SetupInputComponent()
 	InputComponent->BindAxis("MoveX", this, &AControllerForAPlayer::MoveScreenX);
 	InputComponent->BindAxis("MoveY", this, &AControllerForAPlayer::MoveScreenY);
 
+	InputComponent->BindAction("LeftClick", IE_Pressed, this, &AControllerForAPlayer::LeftMouseClick);
+
 }
 
+
+
+
+void AControllerForAPlayer::LeftMouseClick()
+{
+	enum _EObject
+	{
+		BaseStation,
+		PowerStation,
+		MineFactory,
+		SoldierCamp,
+		VehicleFactory,
+
+		Soldiers,
+		Tank,
+		MineTruck,
+	};
+
+	TEnumAsByte<_EObject> EObject;
+	TArray<TEnumAsByte < EObjectTypeQuery >> FindArmyUnit;
+	//FindArmyUnit.Add(EObject);
+	TArray<TEnumAsByte < EObjectTypeQuery >> FindBaseStaion;
+	TArray<TEnumAsByte < EObjectTypeQuery >> FindPowerStation;
+	TArray<TEnumAsByte < EObjectTypeQuery >> FindMineFactory;
+	TArray<TEnumAsByte < EObjectTypeQuery >> FindSoldierCamp;
+	TArray<TEnumAsByte < EObjectTypeQuery >> FindVehicleFactory;
+	FHitResult Hit(ForceInit);
+
+	if (SelectionState == NothingSelected) {
+		GetHitResultUnderCursorForObjects(FindArmyUnit, false, Hit);
+	}
+	else if (SelectionState == SelectBaseStation) {
+
+	}
+	else if (SelectionState == SelectPowerStation) {
+
+	}
+	else if (SelectionState == SelectMineFactory) {
+
+	}
+	else if (SelectionState == SelectSoldierCamp) {
+
+	}
+	else if (SelectionState == SelectVehicleFactory) {
+
+	}
+	else if (SelectionState == UISelectPowerStation) {
+
+	}
+	else if (SelectionState == UISelectMineFactory) {
+
+	}
+	else if (SelectionState == UISelectSoldierCamp) {
+
+	}
+	else if (SelectionState == UISelectVehicleFactory) {
+
+	}
+	else if (SelectionState == SingleSelectUnit) {
+
+	}
+	else if (SelectionState == MultipleSelectUnits) {
+		
+	}
+	else if (SelectionState==SoldingSth) {
+		
+	}
+
+	return;
+}
 
 
 APowerStation *AControllerForAPlayer::CreatePowerStation()
@@ -97,3 +171,19 @@ AVehicleFactory *AControllerForAPlayer::CreateVehicleFactory()
 {
 	return NULL;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

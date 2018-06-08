@@ -13,9 +13,17 @@
 #include"MineFactory.h"
 #include"SoldierCamp.h"
 #include"VehicleFactory.h"
+
+#include"ArmyUnit.h"
+#include"Soldiers.h"
+#include"Tank.h"
+#include"MineTruck.h"
+
 #include"Engine/Scene.h"
 #include "ControllerForAPlayer.generated.h"
 
+
+#define NothingSelected -1
 
 #define SelectBaseStation 0
 #define SelectPowerStation 1
@@ -30,6 +38,8 @@
 
 #define SingleSelectUnit 20
 #define MultipleSelectUnits 21
+
+#define SoldingSth 31
 
 
 
@@ -52,6 +62,9 @@ public:
 	ACameraPawn* GetCameraPawn();
 
 private:
+
+
+	/*Screen control*/
 	void MovePawnToLocation(float AxisValue);
 	void MoveScreenX(float AxisValue);
 	void MoveScreenY(float AxisValue);
@@ -60,25 +73,12 @@ private:
 	float MousePositionX;
 	float MousePositionY;
 
-	APowerStation *CreatePowerStation();
-	AMineFactory *CreateMineFactory();
-	ASoldierCamp *CreateSoldierCamp();
-	AVehicleFactory *CreateVehicleFactory();
+	void LeftMouseClick();
 
 
 
-	ASoldierCamp *CreateSoldier(); // And do not forget to cut the player's money.
-	int32 SoldierAwaitngCreation;
-	//stands for the time needed to creat a soldier. 
-	int32 TimeCost;
 
-
-	ATank *CreateTank();
-	AMineTruck *CreateMineTruck();
-
-
-
-	
+	/*Selection related datas and functions*/
 
 	//Select function and state
 	ARedAlertObjectBase *SingleSelect();
@@ -91,6 +91,11 @@ private:
 	//else, a TArray impleted.
 	TArray<AArmyUnit*> MultipleSelectedUnits;
 
+
+
+
+	/*Buiding related datas*/
+
 	//Pointers store buildings.
 	ABaseStation*  BaseStationPtr;
 	APowerStation* PowerStationPtr;
@@ -98,7 +103,25 @@ private:
 	ASoldierCamp* SoldierCampPtr;
 	AVehicleFactory* VehicleFactoryPtr;
 
-	
+
+	APowerStation *CreatePowerStation();
+	AMineFactory *CreateMineFactory();
+	ASoldierCamp *CreateSoldierCamp();
+	AVehicleFactory *CreateVehicleFactory();
+
+
+	bool CreateSoldier(); // And do not forget to cut the player's money.
+	int32 SdrAwaitngCreation;
+	//stands for the time needed to creat a soldier. 
+	int32 SdrTimeCost;
+
+	bool CreateTank();
+	int32 TkAwaitngCreation;
+	int32 TkTimeCost;
+
+	bool CreateMineTruck();
+	int32 MTAwaitngCreation;
+	int32 MTimeCost;
 
 
 };
