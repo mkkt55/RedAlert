@@ -30,7 +30,6 @@ void AArmyUnit::Tick(float DeltaTime)
 
 void AArmyUnit::MoveTo(FVector VecTarget)
 {
-	/*临时用的瞬移代码
 	//to change the actor's Rotation (to let it see the target
 	FVector VecNowLocation = GetActorLocation();
 	FVector VecDirection = VecTarget - VecNowLocation;
@@ -39,18 +38,7 @@ void AArmyUnit::MoveTo(FVector VecTarget)
 	SetActorRotation(R);
 
 	SetActorLocation(VecTarget);
-	*/
-
-	// Trace to see what is under the touch location
-	UNavigationSystem* const NavSys = GetWorld()->GetController();
-	FHitResult HitResult;
-	APlayerController.GetHitResultAtScreenPosition(FVector, CurrentClickTraceChannel, true, HitResult);
-	if (HitResult.bBlockingHit)
-	{
-
-		// We hit something, move there
-		SetNewMoveDestination(HitResult.ImpactPoint);
-	}
+	
 }
 
 

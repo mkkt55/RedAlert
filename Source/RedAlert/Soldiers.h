@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class REDALERT_API ASoldiers : public AArmyUnit
 {
 	GENERATED_BODY()
