@@ -30,9 +30,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	void Move_XAxis(float AxisValue);
 	void Move_YAxis(float AxisValue);
 	FVector CurrentVelocity;
@@ -43,7 +40,6 @@ private:
 	UPROPERTY(EditAnyWhere)
 		class USpringArmComponent* Arm;
 
-	UPROPERTY(EditAnywhere)
-		UStaticMeshComponent* OurVisibleComponent;
+	
 	
 };

@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
+#include "GameFramework/GameMode.h"
+#include "RedAlertPlayerController.h"
+#include "RTSGameMode.h"
 #include "Blueprint/UserWidget.h"
 #include "RedAlertGameModeBase.generated.h"
 
@@ -11,7 +13,7 @@
  * 
  */
 UCLASS()
-class REDALERT_API ARedAlertGameModeBase : public AGameModeBase
+class REDALERT_API ARedAlertGameModeBase : public ARTSGameMode
 {
 	GENERATED_BODY()
 	

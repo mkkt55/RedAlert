@@ -7,7 +7,7 @@
 ARedAlertGameModeBase::ARedAlertGameModeBase()
 {
 	DefaultPawnClass = ACameraPawn::StaticClass();
-	PlayerControllerClass = AControllerForAPlayer::StaticClass();
+	PlayerControllerClass = ARedAlertPlayerController::StaticClass();
 }
 
 

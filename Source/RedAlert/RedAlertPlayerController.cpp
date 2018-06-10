@@ -1,23 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "ControllerForAPlayer.h"
-#include"Components/InputComponent.h"
+#include "RedAlertPlayerController.h"
 
 
 
 
-
-AControllerForAPlayer::AControllerForAPlayer()
+ARedAlertPlayerController::ARedAlertPlayerController()
 {
-	//PrimaryActorTick.bCanEverTick = true;
-	
-
-	//InputComponent = CreateDefaultSubobject<UInputComponent>(TEXT("InputComponent"));
-	//unreal editor crash because of the two sentences above.
-	
-	//GetMousePosition(MousePositionX, MousePositionY);
+	CameraSpeed = 1000;
+	CameraScrollThreshold = 20;
 }
-void AControllerForAPlayer::BeginPlay()
+void ARedAlertPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	MainPawn = Cast<ACameraPawn>(GetPawn());
@@ -27,23 +20,23 @@ void AControllerForAPlayer::BeginPlay()
 
 }
 
-ACameraPawn* AControllerForAPlayer::GetCameraPawn()
+ACameraPawn* ARedAlertPlayerController::GetCameraPawn()
 {
 	return MainPawn;
 }
 
-void AControllerForAPlayer::Tick(float DeltaTime)
+void ARedAlertPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
 
-void AControllerForAPlayer::MovePawnToLocation(float value)
+void ARedAlertPlayerController::MovePawnToLocation(float value)
 {
 
 }
 
-void AControllerForAPlayer::MoveScreenX(float AxisValue)
+void ARedAlertPlayerController::MoveScreenX(float AxisValue)
 {
 	if (MainPawn != NULL) {
 		MainPawn->CurrentVelocity.X = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
@@ -54,7 +47,7 @@ void AControllerForAPlayer::MoveScreenX(float AxisValue)
 	}
 }
 
-void AControllerForAPlayer::MoveScreenY(float AxisValue)
+void ARedAlertPlayerController::MoveScreenY(float AxisValue)
 {
 	if (MainPawn != NULL) {
 		MainPawn->CurrentVelocity.Y = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
@@ -65,33 +58,20 @@ void AControllerForAPlayer::MoveScreenY(float AxisValue)
 	}
 }
 
-void AControllerForAPlayer::SetupInputComponent()
+void ARedAlertPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
-	
+
 	APlayerController::bShowMouseCursor = true;
 	APlayerController::bEnableClickEvents = true;
 	APlayerController::bEnableMouseOverEvents = true;
 
-
-	/*
-	//InputComponent->BindAxis("MoveX", this, &AControllerForAPlayer::MoveScreenX);
-	//InputComponent->BindAxis("MoveY", this, &AControllerForAPlayer::MoveScreenY);
-
-	//InputComponent->BindAction("LeftClick", IE_Pressed, this, &AControllerForAPlayer::LeftMouseClick);
-	//InputComponent->BindAction("LeftClick", IE_Released, this, &AControllerForAPlayer::LeftMouseClick);
-
-
-	
-	InputComponent->BindAxis(TEXT("MoveCameraLeftRight"), this, &ARTSPlayerController::MoveCameraLeftRight);
-	InputComponent->BindAxis(TEXT("MoveCameraUpDown"), this, &ARTSPlayerController::MoveCameraUpDown);
-	*/
 }
 
 
 
 
-void AControllerForAPlayer::LeftMouseClick()
+void ARedAlertPlayerController::LeftMouseClick()
 {
 	enum _EObject
 	{
@@ -150,49 +130,34 @@ void AControllerForAPlayer::LeftMouseClick()
 
 	}
 	else if (SelectionState == MultipleSelectUnits) {
-		
+
 	}
-	else if (SelectionState==SoldingSth) {
-		
+	else if (SelectionState == SoldingSth) {
+
 	}
 
 	return;
 }
 
 
-APowerStation *AControllerForAPlayer::CreatePowerStation()
+APowerStation *ARedAlertPlayerController::CreatePowerStation()
 {
 	return NULL;
 }
 
-AMineFactory *AControllerForAPlayer::CreateMineFactory()
+AMineFactory *ARedAlertPlayerController::CreateMineFactory()
 {
 	return NULL;
 }
 
-ASoldierCamp *AControllerForAPlayer::CreateSoldierCamp()
-{
-	return NULL;
-}
-
-
-AVehicleFactory *AControllerForAPlayer::CreateVehicleFactory()
+ASoldierCamp *ARedAlertPlayerController::CreateSoldierCamp()
 {
 	return NULL;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+AVehicleFactory *ARedAlertPlayerController::CreateVehicleFactory()
+{
+	return NULL;
+}
 
