@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class REDALERT_API ATank : public AArmyUnit
 {
 	GENERATED_BODY()

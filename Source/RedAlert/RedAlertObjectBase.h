@@ -3,12 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
 #include"Components/StaticMeshComponent.h"
 #include "RedAlertObjectBase.generated.h"
 
-UCLASS()
-class REDALERT_API ARedAlertObjectBase : public AActor
+UCLASS(Blueprintable)
+class REDALERT_API ARedAlertObjectBase : public APawn
 {
 	GENERATED_BODY()
 

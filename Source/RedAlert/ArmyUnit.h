@@ -15,7 +15,7 @@
 /**
 *
 */
-UCLASS()
+UCLASS(Blueprintable)
 class REDALERT_API AArmyUnit : public ARedAlertObjectBase
 {
 	GENERATED_BODY()
