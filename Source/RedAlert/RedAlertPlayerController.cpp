@@ -7,6 +7,9 @@
 
 ARedAlertPlayerController::ARedAlertPlayerController()
 {
+	bShowMouseCursor = true;
+	bEnableClickEvents = true;
+	bEnableMouseOverEvents = true;
 	CameraSpeed = 1000;
 	CameraScrollThreshold = 20;
 }
@@ -62,9 +65,7 @@ void ARedAlertPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	APlayerController::bShowMouseCursor = true;
-	APlayerController::bEnableClickEvents = true;
-	APlayerController::bEnableMouseOverEvents = true;
+	
 
 }
 
