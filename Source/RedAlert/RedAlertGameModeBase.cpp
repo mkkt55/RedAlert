@@ -1,13 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RedAlertGameModeBase.h"
-#include"CameraPawn.h"
-#include"ControllerForAPlayer.h"
 
 ARedAlertGameModeBase::ARedAlertGameModeBase()
 {
 	DefaultPawnClass = ACameraPawn::StaticClass();
 	PlayerControllerClass = ARedAlertPlayerController::StaticClass();
+
+	
+	static ConstructorHelpers::FObjectFinder<UBlueprint> MyHUD(TEXT("Blueprint'/Game/UI/RedAlertHUD.RedAlertHUD'"));
+	if (MyHUD.Object) {
+		HUDClass = (UClass*)MyHUD.Object->GeneratedClass;
+	}
 }
 
 
