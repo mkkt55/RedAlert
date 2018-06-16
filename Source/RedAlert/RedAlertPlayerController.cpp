@@ -12,6 +12,12 @@ ARedAlertPlayerController::ARedAlertPlayerController()
 	bEnableMouseOverEvents = true;
 	CameraSpeed = 1000;
 	CameraScrollThreshold = 20;
+	TSubclassOf<URTSResourceType> ResrceType;
+	static ConstructorHelpers::FObjectFinder<UBlueprint> MoneyClass(TEXT("Blueprint'/Game/Resources/Money.Money'"));
+	if (MoneyClass.Object) {
+		//ResrceType = (UClass*)MoneyClass.Object->GeneratedClass;
+		//for (int i = 0; i < 3; i++) 
+	}
 }
 void ARedAlertPlayerController::BeginPlay()
 {

@@ -28,7 +28,7 @@ ARedAlertGameModeBase::ARedAlertGameModeBase()
 	FVector Pos;
 	Pos.X = 0;
 	Pos.Y = 0;
-	Pos.Z = 300;
+	Pos.Z = 0;
 	InitialActorPositions.Add(Pos);
 	
 }
