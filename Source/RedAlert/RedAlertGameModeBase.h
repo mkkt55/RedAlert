@@ -6,6 +6,8 @@
 #include "GameFramework/GameMode.h"
 #include "RedAlertPlayerController.h"
 #include "RTSGameMode.h"
+#include"RedAlertGameState.h"
+#include"RedAlertPlayerState.h"
 #include "Blueprint/UserWidget.h"
 #include "CameraPawn.h"
 #include "ControllerForAPlayer.h"
