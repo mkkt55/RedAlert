@@ -8,7 +8,6 @@
 #include"Components/InputComponent.h"
 #include"CameraPawn.h"
 
-
 #include "RedAlertObjectBase.h"
 #include"BaseStation.h"
 #include"PowerStation.h"
@@ -21,9 +20,6 @@
 #include"Tank.h"
 #include"MineTruck.h"
 
-#include"RTSResourceType.h"
-
-#include "ConstructorHelpers.h"
 #include"Engine/Scene.h"
 #include "RedAlertPlayerController.generated.h"
 
@@ -45,18 +41,6 @@
 #define MultipleSelectUnits 21
 
 #define SoldingSth 31
-
-class USkeletalMesh;
-
-class ARTSBuildingCursor;
-class ARTSCameraBoundsVolume;
-class URTSPlayerAdvantageComponent;
-class URTSPlayerResourcesComponent;
-class ARTSPlayerState;
-class URTSResourceType;
-class ARTSTeamInfo;
-class ARTSVisionInfo;
-
 
 /**
  * 

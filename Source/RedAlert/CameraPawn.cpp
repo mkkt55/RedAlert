@@ -11,14 +11,11 @@ ACameraPawn::ACameraPawn()
 
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-	FVector NPos = GetActorLocation();
-	NPos.Z = 1000;
-	RootComponent->SetWorldLocation(NPos);
-
+	
 	Arm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComponent"));
 	Arm->SetupAttachment(RootComponent);
-	Arm->TargetArmLength = 100;
-	FRotator Ro(-60, 0, 0);
+	Arm->TargetArmLength = 1500;
+	FRotator Ro(-70, 0, 0);
 	Arm->RelativeRotation = Ro;
 	
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
