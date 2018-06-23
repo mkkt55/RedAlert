@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+
+#include "RTSPluginPCH.h"
+#include "RTSBuilderComponent.h"
+
 #include "RedAlertBuilder.generated.h"
 
 UCLASS()
@@ -26,6 +30,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	URTSBuilderComponent* BuilderComponent;
 	
 };
