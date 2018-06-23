@@ -8,7 +8,6 @@
 #include "RTSPluginPCH.h"
 #include "RTSGameMode.h"
 
-#include "Builder.h"
 #include "RedAlertPlayerController.h"
 #include "RTSGameMode.h"
 #include "Blueprint/UserWidget.h"

@@ -6,13 +6,11 @@
 
 ARedAlertGameModeBase::ARedAlertGameModeBase()
 {
-	BuildingCursor = GetWorld()->SpawnActor<ARTSBuildingCursor>(BuildingCursorClass, SpawnParams);
-	Builder=GetWorld()->SpawnActor()
+
 }
 
 
 void ARedAlertGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
