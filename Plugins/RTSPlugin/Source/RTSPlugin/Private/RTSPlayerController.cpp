@@ -32,7 +32,8 @@
 #include "RTSTeamInfo.h"
 #include "RTSUtilities.h"
 #include "RTSVisionInfo.h"
-
+#include "RTSResourceType.h"
+#include "RTSGameMode.h"
 
 ARTSPlayerController::ARTSPlayerController()
 {
@@ -53,6 +54,12 @@ void ARTSPlayerController::BeginPlay()
             PlayerResourcesComponent->ResourceAmounts[Index],
             true);
     }
+	ARTSGameMode* GameMode = Cast<ARTSGameMode>(UGameplayStatics::GetGameMode(this));
+	AActor* Actor = GameMode->SpawnActorForPlayer(
+		BuilderClass,
+		Cast<AController>(this),
+		FTransform());
+	Builder = Cast<APawn>(Actor);
 }
 
 void ARTSPlayerController::SetupInputComponent()
@@ -462,18 +469,19 @@ bool ARTSPlayerController::ServerIssueAttackOrder_Validate(APawn* OrderedPawn, A
 bool ARTSPlayerController::IssueBeginConstructionOrder(TSubclassOf<AActor> BuildingClass, const FVector& TargetLocation)
 {
 	// Find suitable selected builder.
-	for (auto SelectedActor : SelectedActors)
-	{
-		APawn* SelectedPawn = Cast<APawn>(SelectedActor);
+	
+		APawn* SelectedPawn = Builder;
 
 		if (!SelectedPawn)
 		{
-			continue;
+			UE_LOG(LogRTS, Log, TEXT("error BeginConstructionOrder."));
+			return false;
 		}
 
 		if (SelectedPawn->GetOwner() != this)
 		{
-			continue;
+			UE_LOG(LogRTS, Log, TEXT("error BeginConstructionOrder."));
+			return false;
 		}
 
 		// Check if builder.
@@ -481,31 +489,30 @@ bool ARTSPlayerController::IssueBeginConstructionOrder(TSubclassOf<AActor> Build
 
 		if (!BuilderComponent)
 		{
-			continue;
+			return false;
 		}
 
 		// Check if builder knows about building.
 		if (!BuilderComponent->ConstructibleBuildingClasses.Contains(BuildingClass))
 		{
-			continue;
+			return false;
 		}
 
 		// Send construction order to server.
-		ServerIssueBeginConstructionOrder(SelectedPawn, BuildingClass, TargetLocation);
+		ServerIssueBeginConstructionOrder(Builder, BuildingClass, TargetLocation);
 
         if (IsNetMode(NM_Client))
         {
-            UE_LOG(LogRTS, Log, TEXT("Ordered actor %s to begin constructing %s at %s."), *SelectedPawn->GetName(), *BuildingClass->GetName(), *TargetLocation.ToString());
+            UE_LOG(LogRTS, Log, TEXT("Ordered actor %s to begin constructing %s at %s."), *Builder->GetName(), *BuildingClass->GetName(), *TargetLocation.ToString());
 
             // Notify listeners.
-            NotifyOnIssuedBeginConstructionOrder(SelectedPawn, BuildingClass, TargetLocation);
+            NotifyOnIssuedBeginConstructionOrder(Builder, BuildingClass, TargetLocation);
         }
 
 		// Just send one builder.
 		return true;
-	}
+	
 
-	return false;
 }
 
 bool ARTSPlayerController::ServerIssueContinueConstructionOrder_Validate(APawn* OrderedPawn, AActor* ConstructionSite)
@@ -520,6 +527,7 @@ void ARTSPlayerController::ServerIssueBeginConstructionOrder_Implementation(APaw
 
 	if (!PawnController)
 	{
+		UE_LOG(LogRTS, Log, TEXT("Empty %s  %s at %s."), *OrderedPawn->GetName(), *BuildingClass->GetName(), *TargetLocation.ToString());
 		return;
 	}
 
@@ -550,49 +558,52 @@ bool ARTSPlayerController::IssueContinueConstructionOrder(AActor* ConstructionSi
 	// Issue construction orders.
 	bool bSuccess = false;
 
-	for (auto SelectedActor : SelectedActors)
-	{
-		APawn* SelectedPawn = Cast<APawn>(SelectedActor);
+	
+		APawn* SelectedPawn = Builder;
 
 		if (!SelectedPawn)
 		{
-			continue;
+			UE_LOG(LogRTS, Log, TEXT("error IssueContinueConstructionOrder."));
+			return false;
 		}
 
 		if (SelectedPawn->GetOwner() != this)
 		{
-			continue;
+			UE_LOG(LogRTS, Log, TEXT("error IssueContinueConstructionOrder."));
+			return false;
 		}
 
 		// Verify target.
 		auto TargetOwnerComponent = ConstructionSite->FindComponentByClass<URTSOwnerComponent>();
 
-		if (TargetOwnerComponent && !TargetOwnerComponent->IsSameTeamAsActor(SelectedActor))
+		if (TargetOwnerComponent && !TargetOwnerComponent->IsSameTeamAsActor(SelectedPawn))
 		{
-			continue;
+			UE_LOG(LogRTS, Log, TEXT("error IssueContinueConstructionOrder."));
+			return false;
 		}
 
-		if (SelectedActor->FindComponentByClass<URTSBuilderComponent>() == nullptr)
+		if (SelectedPawn->FindComponentByClass<URTSBuilderComponent>() == nullptr)
 		{
-			continue;
+			UE_LOG(LogRTS, Log, TEXT("error IssueContinueConstructionOrder."));
+			return false;
 		}
 
 		// Send construction order to server.
-		ServerIssueContinueConstructionOrder(SelectedPawn, ConstructionSite);
+		ServerIssueContinueConstructionOrder(Builder, ConstructionSite);
 
         if (IsNetMode(NM_Client))
         {
-            UE_LOG(LogRTS, Log, TEXT("Ordered actor %s to continue constructing %s."), *SelectedActor->GetName(), *ConstructionSite->GetName());
+            UE_LOG(LogRTS, Log, TEXT("Ordered actor %s to continue constructing %s."), *Builder->GetName(), *ConstructionSite->GetName());
 
             // Notify listeners.
-            NotifyOnIssuedContinueConstructionOrder(SelectedPawn, ConstructionSite);
+            NotifyOnIssuedContinueConstructionOrder(Builder, ConstructionSite);
         }
 
 		bSuccess = true;
+		return true;
 	}
 
-	return bSuccess;
-}
+
 
 bool ARTSPlayerController::IssueGatherOrder(AActor* ResourceSource)
 {
@@ -1015,11 +1026,11 @@ bool ARTSPlayerController::CheckCanBeginBuildingPlacement(TSubclassOf<AActor> Bu
     }
 
     // Check requirements.
-    if (SelectedActors.Num() > 0)
+    if (true)
     {
         TSubclassOf<AActor> MissingRequirement;
 
-        if (URTSUtilities::GetMissingRequirementFor(this, SelectedActors[0], BuildingClass, MissingRequirement))
+        if (URTSUtilities::GetMissingRequirementFor(this,Builder, BuildingClass, MissingRequirement))
         {
             URTSNameComponent* NameComponent = URTSUtilities::FindDefaultComponentByClass<URTSNameComponent>(MissingRequirement);
 

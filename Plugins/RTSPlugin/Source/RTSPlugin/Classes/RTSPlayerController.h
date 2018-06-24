@@ -28,6 +28,11 @@ class RTSPLUGIN_API ARTSPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS|Construction")
+	TSubclassOf<APawn> BuilderClass;
+
+	APawn* Builder;
+
     /** Movement speed of the camera when moved with keys or mouse, in cm/sec. */
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS|Camera", meta = (ClampMin = 0))
     float CameraSpeed;
