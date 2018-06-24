@@ -2,7 +2,7 @@
 #include "RTSConstructionSiteComponent.h"
 
 #include "GameFramework/Actor.h"
-
+#include "Net/UnrealNetwork.h"
 #include "RTSBuilderComponent.h"
 #include "RTSContainerComponent.h"
 #include "RTSPlayerAdvantageComponent.h"
@@ -88,7 +88,7 @@ void URTSConstructionSiteComponent::TickComponent(float DeltaTime, enum ELevelTi
 
         if (!Owner)
         {
-            UE_LOG(LogRTS, Error, TEXT("%s needs to pay for construction, but has no owner."), *Owner->GetName());
+            //UE_LOG(LogRTS, Error, TEXT("%s needs to pay for construction, but has no owner."), *Owner->GetName());
             return;
         }
 

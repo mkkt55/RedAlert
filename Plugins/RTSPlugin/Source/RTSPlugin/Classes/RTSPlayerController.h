@@ -30,8 +30,15 @@ class RTSPLUGIN_API ARTSPlayerController : public APlayerController
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS|Construction")
 	TSubclassOf<APawn> BuilderClass;
-
+	UPROPERTY(Replicated)
 	APawn* Builder;
+	void SpawnBuilder();
+
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerSpawnBuilder(ARTSPlayerController* OwnerController);
+	void ServerSpawnBuilder_Implementation(ARTSPlayerController* OwnerController);
+	bool ServerSpawnBuilder_Validate(ARTSPlayerController* OwnerController);
+
 
     /** Movement speed of the camera when moved with keys or mouse, in cm/sec. */
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS|Camera", meta = (ClampMin = 0))

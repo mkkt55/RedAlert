@@ -33,6 +33,7 @@
 #include "RTSUtilities.h"
 #include "RTSVisionInfo.h"
 #include "RTSResourceType.h"
+#include "Net/UnrealNetwork.h"
 #include "RTSGameMode.h"
 
 ARTSPlayerController::ARTSPlayerController()
@@ -54,12 +55,27 @@ void ARTSPlayerController::BeginPlay()
             PlayerResourcesComponent->ResourceAmounts[Index],
             true);
     }
+	ARTSPlayerController* Passing = this;
+	ServerSpawnBuilder(Passing);
+}
+
+
+void ARTSPlayerController::ServerSpawnBuilder_Implementation(ARTSPlayerController* OwnerController)
+{
 	ARTSGameMode* GameMode = Cast<ARTSGameMode>(UGameplayStatics::GetGameMode(this));
 	AActor* Actor = GameMode->SpawnActorForPlayer(
 		BuilderClass,
-		Cast<AController>(this),
+		Cast<AController>(OwnerController),
 		FTransform());
-	Builder = Cast<APawn>(Actor);
+	if (Actor == NULL)
+	{
+		UE_LOG(LogRTS, Log, TEXT("Empty Actor Ptr!"));
+	}
+	OwnerController->Builder = (APawn*)Actor;
+}
+bool ARTSPlayerController::ServerSpawnBuilder_Validate(ARTSPlayerController* OwnerController)
+{
+	return true;
 }
 
 void ARTSPlayerController::SetupInputComponent()
@@ -142,6 +158,7 @@ void ARTSPlayerController::SetupInputComponent()
 void ARTSPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(ARTSPlayerController, Builder);
 }
 
 AActor* ARTSPlayerController::GetHoveredActor()
@@ -480,7 +497,7 @@ bool ARTSPlayerController::IssueBeginConstructionOrder(TSubclassOf<AActor> Build
 
 		if (SelectedPawn->GetOwner() != this)
 		{
-			UE_LOG(LogRTS, Log, TEXT("error BeginConstructionOrder."));
+			UE_LOG(LogRTS, Log, TEXT("error BeginConstructionOrder for its owner."));
 			return false;
 		}
 
@@ -1595,7 +1612,12 @@ void ARTSPlayerController::PlayerTick(float DeltaTime)
             CameraUpDownAxisValue -= (MouseY - ScrollBorderTop) / CameraScrollThreshold;
         }
     }
-
+	/*
+	if (!Builder)
+	{
+		UE_LOG(LogRTS, Log, TEXT("Empty Builder Ptr!"));
+	}
+	*/
     // Apply input.
     CameraLeftRightAxisValue = FMath::Clamp(CameraLeftRightAxisValue, -1.0f, +1.0f);
     CameraUpDownAxisValue = FMath::Clamp(CameraUpDownAxisValue, -1.0f, +1.0f);
