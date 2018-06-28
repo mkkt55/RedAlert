@@ -8,7 +8,12 @@ AArmyUnit::AArmyUnit()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	AttackComponent = CreateDefaultSubobject<URTSAttackComponent>(TEXT("Construction"));
+	HealthComponent = CreateDefaultSubobject<URTSHealthComponent>(TEXT("Health"));
+	AttackableComponent = CreateDefaultSubobject<URTSAttackableComponent>(TEXT("Attackable"));
+	SelectableComponent = CreateDefaultSubobject<URTSSelectableComponent>(TEXT("Selectable"));
+	OwnerComponent = CreateDefaultSubobject<URTSOwnerComponent>(TEXT("Owner"));
+	ProductionComponent = CreateDefaultSubobject<URTSProductionCostComponent>(TEXT("Production"));
 }
 
 // Called when the game starts or when spawned
@@ -18,15 +23,18 @@ void AArmyUnit::BeginPlay()
 
 }
 
-// Called every frame
+
 void AArmyUnit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (ActionState == AttackState) { //see the macro definations in head file.
-		AttackTarget->ReceivedTotalDamage += DeltaTime*Damage;
+	/*if (ActionState == AttackState) { //see the macro definations in head file.
+		URTSHealthComponent* Health = AttackTarget->FindComponentByClass<URTSHealthComponent>(); 
+		if (!Health) {
+			Health->CurrentHealth -= DeltaTime*Damage;
+		}
 	}
+	*/
 }
-
 
 void AArmyUnit::MoveTo(FVector VecTarget)
 {
@@ -41,10 +49,7 @@ void AArmyUnit::MoveTo(FVector VecTarget)
 	
 }
 
-
-
-
-void AArmyUnit::Attack(ARedAlertObjectBase *Target)
+void AArmyUnit::Attack(AActor *Target)
 {
 
 }

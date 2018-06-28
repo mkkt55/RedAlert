@@ -6,6 +6,11 @@
 ATank::ATank()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	HealthComponent->CurrentHealth = 1000;
+	HealthComponent->MaximumHealth = 1000;
+	ProductionComponent->ProductionTime = 15;
+	ProductionComponent->RefundFactor = 1;
 }
 
 

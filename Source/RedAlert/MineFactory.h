@@ -4,7 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "RedAlertObjectBase.h"
-#include"MineTruck.h"
+#include "RTSPluginPCH.h"
+#include "RTSProductionComponent.h"
 #include "MineFactory.generated.h"
 
 /**
@@ -16,12 +17,17 @@ class REDALERT_API AMineFactory : public ARedAlertObjectBase
 	GENERATED_BODY()
 	
 public:
+
 	AMineFactory();
+
 protected:
+
 	virtual void BeginPlay() override;
 
 public:
+
 	virtual void Tick(float DeltaTime) override;
-	AMineTruck *TruckPtr;
-	void AddMoney();
+
+	URTSProductionComponent* ProductionComponent;
+
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "ArmyUnit.h"
+#include "RTSGathererComponent.h"
 #include "MineTruck.generated.h"
 
 /**
@@ -23,5 +24,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	//use attack() to "attack" resources
-	
+	URTSGathererComponent* Gather;
 };

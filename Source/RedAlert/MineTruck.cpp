@@ -7,6 +7,13 @@
 AMineTruck::AMineTruck()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	HealthComponent->CurrentHealth = 1400;
+	HealthComponent->MaximumHealth = 1400;
+	ProductionComponent->ProductionTime = 20;
+	ProductionComponent->RefundFactor = 1;
+
+	Gather = CreateDefaultSubobject<URTSGathererComponent>(TEXT("Gatherer"));
 }
 
 

@@ -7,6 +7,13 @@
 
 #include "RTSPluginPCH.h"
 #include "RTSBuilderComponent.h"
+#include "RTSOwnerComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "BaseStation.h"
+#include "PowerStation.h"
+#include "SoldierCamp.h"
+#include "MineFactory.h"
+#include "VehicleFactory.h"
 
 #include "RedAlertBuilder.generated.h"
 
@@ -28,8 +35,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	URTSBuilderComponent* BuilderComponent;
+	UPROPERTY(EditAnywhere)
+	UFloatingPawnMovement* Movement;
+	UPROPERTY(EditAnywhere)
+	URTSBuilderComponent* Builder;
+	UPROPERTY(EditAnywhere)
+	URTSOwnerComponent* OwnerComponent;
+	UPROPERTY(EditAnywhere)
+	USceneComponent* Root;
 	
 };

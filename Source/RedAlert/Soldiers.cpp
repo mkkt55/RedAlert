@@ -7,6 +7,11 @@
 ASoldiers::ASoldiers()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	
+	HealthComponent->CurrentHealth = 400;
+	HealthComponent->MaximumHealth = 400;
+	ProductionComponent->ProductionTime = 2;
+	ProductionComponent->RefundFactor = 1;
 }
 
 
