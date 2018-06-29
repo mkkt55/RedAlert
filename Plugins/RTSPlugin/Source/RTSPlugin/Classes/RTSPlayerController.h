@@ -28,6 +28,7 @@ class RTSPLUGIN_API ARTSPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+	//增加网络部分函数
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS|Construction")
 	TSubclassOf<APawn> BuilderClass;
 	UPROPERTY(Replicated)

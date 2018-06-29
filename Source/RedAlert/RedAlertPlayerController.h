@@ -5,8 +5,13 @@
 #include "CoreMinimal.h"
 #include "RTSPlayerController.h"
 #include "GameFramework/PlayerController.h"
-#include"Components/InputComponent.h"
 #include"CameraPawn.h"
+#include "EngineUtils.h"
+#include "Landscape.h"
+#include "Components/InputComponent.h"
+#include "Engine/Engine.h"
+#include "Engine/LocalPlayer.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "RedAlertObjectBase.h"
 #include"BaseStation.h"
@@ -14,6 +19,7 @@
 #include"MineFactory.h"
 #include"SoldierCamp.h"
 #include"VehicleFactory.h"
+#include"RedAlertBuilder.h"
 
 #include"ArmyUnit.h"
 #include"Soldiers.h"
@@ -43,28 +49,33 @@
 #define SoldingSth 31
 
 /**
- * 
- */
+*
+*/
 UCLASS()
 class REDALERT_API ARedAlertPlayerController : public ARTSPlayerController
 {
 	GENERATED_BODY()
-	
+
 protected:
-	//virtual void BeginPlay() override;
+	virtual void BeginPlay() override;
+	virtual void SetupInputComponent() override;
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 public:
 	ARedAlertPlayerController();
-	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupInputComponent() override;
+	virtual void PlayerTick(float DeltaTime) override;
 
 	ACameraPawn* GetCameraPawn();
 
-private:
+	UPROPERTY(Replicated)
+	ARedAlertBuilder* BuilderPawn;
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerSpawnBuilderPawn();
+	void ServerSpawnBuilderPawn_Implementation();
+	bool ServerSpawnBuilderPawn_Validate();
 
 
 	/*Screen control*/
-	void MovePawnToLocation(float AxisValue);
+	void MovePawnToLocation(AActor* Actor, const FVector& Location);
 	void MoveScreenX(float AxisValue);
 	void MoveScreenY(float AxisValue);
 
@@ -73,6 +84,8 @@ private:
 	float MousePositionY;
 
 	void LeftMouseClick();
+	void FinishLeftMouseClick();
+	void RightMouseClick();
 
 
 
@@ -80,13 +93,13 @@ private:
 	/*Selection related datas and functions*/
 
 	//Select function and state
-	ARedAlertObjectBase *SingleSelect();
-	AArmyUnit *MultipleSelect();
+	bool SingleSelect(AActor*);
+	bool MultipleSelect();
 
 	//Selection is single, multiple or via UI, if single, stores witch type of object is selected. If multiple, those must all be armyunits.
 	int32 SelectionState;
 	//if single, store the actor in the pointer.
-	ARedAlertObjectBase* SingleSelectedObj;
+	AActor* SingleSelectedActor;
 	//else, a TArray impleted.
 	TArray<AArmyUnit*> MultipleSelectedUnits;
 
@@ -94,7 +107,13 @@ private:
 
 
 	/*Buiding related datas*/
+	UFUNCTION(Reliable, Server, WithValidation)
+	void ServerConfirmBuilding(UClass* BuildingClass);
+	void ServerConfirmBuilding_Implementation(UClass* BuildingClass);
+	bool ServerConfirmBuilding_Validate(UClass* BuildingClass);
 
+	UClass* BuildingAwaiting;
+	
 	//Pointers store buildings.
 	ABaseStation*  BaseStationPtr;
 	APowerStation* PowerStationPtr;
@@ -103,10 +122,11 @@ private:
 	AVehicleFactory* VehicleFactoryPtr;
 
 
-	APowerStation *CreatePowerStation();
-	AMineFactory *CreateMineFactory();
-	ASoldierCamp *CreateSoldierCamp();
-	AVehicleFactory *CreateVehicleFactory();
+	void CreatePowerStation();
+
+	void CreateMineFactory();
+	void CreateSoldierCamp();
+	void CreateVehicleFactory();
 
 
 	bool CreateSoldier(); // And do not forget to cut the player's money.
@@ -121,6 +141,6 @@ private:
 	bool CreateMineTruck();
 	int32 MTAwaitngCreation;
 	int32 MTimeCost;
-	
-	
+
+
 };
