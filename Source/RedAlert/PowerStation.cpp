@@ -9,7 +9,7 @@ APowerStation::APowerStation()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	AttackComponent = CreateDefaultSubobject<URTSAttackComponent>(TEXT("Attack"));
-
+	//abcdefghijklmnopqrstuvwxyz
 	ConstructionComponent->ConstructionTime = 20;
 	ConstructionComponent->bStartImmediately = true;
 	ConstructionComponent->bConsumesBuilders = false;
@@ -18,7 +18,7 @@ APowerStation::APowerStation()
 	ConstructionComponent->RemainingConstructionTime = 0;
 	HealthComponent->CurrentHealth = 1000;
 	HealthComponent->MaximumHealth = 1000;
-
+	//abcdefghijklmnopqrstuvwxyz
 	AttackComponent->AcquisitionRadius = 1000;
 }
 
@@ -26,11 +26,11 @@ APowerStation::APowerStation()
 void APowerStation::BeginPlay()
 {
 	Super::BeginPlay();
-
+	//abcdefghijklmnopqrstuvwxyz
 }
 
 void APowerStation::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
-
+	Super::Tick(DeltaTime);//abcdefghijklmnopqrstuvwxyz
+						   //abcdefghijklmnopqrstuvwxyz
 }

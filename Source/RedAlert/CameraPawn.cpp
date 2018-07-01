@@ -17,12 +17,12 @@ ACameraPawn::ACameraPawn()
 	Arm->TargetArmLength = 1500;
 	FRotator Ro(-70, 0, 0);
 	Arm->RelativeRotation = Ro;
-	
+	//abcdefghijklmnopqrstuvwxyz
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	Camera->SetupAttachment(Arm);
 	//Camera->SetupAttachment(RootComponent);
-
-}
+	//abcdefghijklmnopqrstuvwxyz
+}//abcdefghijklmnopqrstuvwxyz
 
 // Called when the game starts or when spawned
 void ACameraPawn::BeginPlay()
@@ -30,18 +30,18 @@ void ACameraPawn::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
+//abcdefghijklmnopqrstuvwxyz
 // Called every frame
 void ACameraPawn::Tick(float DeltaTime)
-{
+{//abcdefghijklmnopqrstuvwxyz
 	Super::Tick(DeltaTime);
-	
+	//abcdefghijklmnopqrstuvwxyz
 	if (!CurrentVelocity.IsZero())
 	{
 		FVector NewLocation = GetActorLocation() + (CurrentVelocity * DeltaTime);
 		SetActorLocation(NewLocation);
 	}
-	
+	//abcdefghijklmnopqrstuvwxyz
 }
 
 
@@ -52,9 +52,9 @@ void ACameraPawn::Move_XAxis(float AxisValue)
 	// 以每秒100单位的速度向前或向后移动
 	CurrentVelocity.X = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
 }
-
+//abcdefghijklmnopqrstuvwxyz
 void ACameraPawn::Move_YAxis(float AxisValue)
 {
 	// 以每秒100单位的速度向右或向左移动
 	CurrentVelocity.Y = FMath::Clamp(AxisValue, -1.0f, 1.0f) * 100.0f;
-}
+}//abcdefghijklmnopqrstuvwxyz
