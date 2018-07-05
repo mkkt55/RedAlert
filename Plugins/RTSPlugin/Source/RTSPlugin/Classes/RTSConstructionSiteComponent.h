@@ -43,39 +43,40 @@ public:
 	float ConstructionTime;
 
 	/** Whether any builders working at this construction site are destroyed when finished. */
+	//abcdefghijklmnopqrstuvwxyz
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS")
 	bool bConsumesBuilders;
-
+	//abcdefghijklmnopqrstuvwxyz
 	/** How many builders may be assigned to this construction site at the same time. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS")
 	int32 MaxAssignedBuilders;
-
+	//abcdefghijklmnopqrstuvwxyz
 	/** Factor to multiply all passed construction time with, independent of any currently assigned builders. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS")
 	float ProgressMadeAutomatically;
-
+	//abcdefghijklmnopqrstuvwxyz
 	/** Factor to multiply all passed construction time with, multiplied with the number of currently assigned builders. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS")
 	float ProgressMadePerBuilder;
-
+	//abcdefghijklmnopqrstuvwxyz
 	/** Time before the actor is constructed, in seconds. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS", replicated)
 	float RemainingConstructionTime;
-
+	//abcdefghijklmnopqrstuvwxyz
 	/** Resources to refund when canceling construction. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS")
 	float RefundFactor;
-
+	//abcdefghijklmnopqrstuvwxyz
 	/** Whether to start construction immediately after spawn, or not. */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "RTS")
 	bool bStartImmediately;
-
-
+	//abcdefghijklmnopqrstuvwxyz
+	//abcdefghijklmnopqrstuvwxyz
 	URTSConstructionSiteComponent(const FObjectInitializer& ObjectInitializer);
-
+	//abcdefghijklmnopqrstuvwxyz
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-
-
+	//abcdefghijklmnopqrstuvwxyz
+	//abcdefghijklmnopqrstuvwxyz
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
